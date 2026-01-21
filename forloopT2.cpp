@@ -1,20 +1,29 @@
 #include <iostream>
-#include <string.h>
+#include <string>
+#include <map> 
 
 int main(void)
 {
-     std::string name ;
-     std::cout << "what's your name? ";
+     std::string name;
+     std::cout << "Enter a string: ";
      std::cin >> name;
-     int freq[256] = {0};
-     for(int i =0; i < name.size(); i++){
-          freq[int(name[i])]++;
+     
+     std::map<char, int> freq;  
+     
+     // Count frequency
+     for(int i = 0; i < name.size(); i++){
+          freq[name[i]]++;
      }
+     
      int count = 0;
-     for(int i =0; i < 256; i++){
-          if(freq[i] > 1) count++;
+     std::cout << "\nCharacters appearing more than once:\n";  
+     for(auto &pair : freq){  
+          if(pair.second > 1) {
+               std::cout << "'" << pair.first << "' appears " << pair.second << " times\n";
+               count++;
+          }
      }
-
-     std::cout << "total count Value:- " << count << std::endl;
+     
+     std::cout << "\nTotal repeating characters: " << count << std::endl;
      return 0;
 }

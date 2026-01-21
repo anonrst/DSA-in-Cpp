@@ -1,45 +1,54 @@
 #include <iostream>
 #include <iomanip>
-int main()
+
+double calculateTax(double income, int &taxPercentage)
 {
-     using namespace std;
-     double income;
-     double taxAmount;
-     double netIncome;
-     int taxPercentage;
-     cout << "how much is your income? ";
-     cin >> income;
      if (income <= 250000)
      {
           taxPercentage = 0;
-          taxAmount = 0;
-          netIncome = income;
+          return 0;
      }
      else if (income < 500000)
      {
           taxPercentage = 5;
-          taxAmount = (income * taxPercentage) / 100;
-          netIncome = income - taxAmount;
+          return (income * taxPercentage) / 100;
      }
      else if (income < 1000000)
      {
           taxPercentage = 20;
-          taxAmount = (income * taxPercentage) / 100;
-          netIncome = income - taxAmount;
-     }
-     else if (income >= 1000000)
-     {
-          taxPercentage = 30;
-          taxAmount = (income * taxPercentage) / 100;
-          netIncome = income - taxAmount;
+          return (income * taxPercentage) / 100;
      }
      else
      {
+          taxPercentage = 30;
+          return (income * taxPercentage) / 100;
+     }
+}
+
+int main()
+{
+     using namespace std;
+     double income;
+     int taxPercentage;
+     
+     cout << "Enter your annual income: $";
+     cin >> income;
+     
+     if (income < 0) 
+     {
+          cout << "Invalid income!" << endl;
           return 1;
      }
+     
+     double taxAmount = calculateTax(income, taxPercentage); 
+     double netIncome = income - taxAmount;
+     
      cout << fixed << setprecision(2);
-     cout << "tax percentage:- " << taxPercentage << endl;
-     cout << "tax Amount:- " << taxAmount << endl;
-     cout << "net Income:- " << netIncome << endl;
+     cout << "\n=== Tax Calculation ===\n"; 
+     cout << "Gross Income: $" << income << endl;
+     cout << "Tax Percentage: " << taxPercentage << "%" << endl;
+     cout << "Tax Amount: $" << taxAmount << endl;
+     cout << "Net Income: $" << netIncome << endl;
+     
      return 0;
 }
